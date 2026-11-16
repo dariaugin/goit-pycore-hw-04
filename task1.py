@@ -14,15 +14,12 @@ def total_salary(path):
                     continue
                 # to make sure only 2 fields are present
                 name, salary = line.split(",")
-                # to make sure fields are not empty 
+                # name must not be empty, salary must be a number 
                 if not (name and salary.isdigit()):
                     raise ValueError
-                salaries.append(salary)
+                salaries.append(int(salary))
     except FileNotFoundError:
         print(f"File not found: {path}")
-        return None, None
-    except IndexError:
-        print(f"File {path} has invalid data")
         return None, None
     except ValueError:
         print(f"File {path} has invalid data")
@@ -35,10 +32,6 @@ def total_salary(path):
     total = sum(salaries)
     return total, total / len(salaries)
 
-
-
-
-    
 if __name__ == "__main__":
     file_path = "salaries.txt"
     total, average = total_salary(file_path)
